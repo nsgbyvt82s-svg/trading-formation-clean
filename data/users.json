@@ -1,0 +1,17 @@
+{
+  "users": [
+    {
+      "email": "admin@example.com",
+      "password": "$2a$10$/Lrx0h33HIS2WkpQPS8Fq.v3sEkXHK8skNmpUAMTMzzy.2K./OEL2",
+      "name": "Administrateur",
+      "username": "admin",
+      "role": "ADMIN",
+      "status": "ACTIVE",
+      "emailVerified": "2026-01-01T04:24:20.410Z",
+      "id": "user_f6015281-9792-42d6-9651-38ce6492423f",
+      "discordId": null,
+      "createdAt": "2026-01-01T04:24:20.482Z",
+      "updatedAt": "2026-01-01T04:24:20.482Z"
+    }
+  ]
+}

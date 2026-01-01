@@ -1,0 +1,41 @@
+[
+  {
+    "id": "87b09c67-7034-4f21-9418-0872cfbcca31",
+    "title": "Formation Gold Mise à jour",
+    "description": "Description mise à jour avec de nouvelles fonctionnalités",
+    "price": 99.99,
+    "isActive": true,
+    "startDate": "2026-01-15T00:00:00.000Z",
+    "endDate": "2026-12-31T00:00:00.000Z",
+    "features": [
+      "Accès complet à la formation",
+      "Support prioritaire",
+      "Mises à jour gratuites",
+      "Ressources exclusives"
+    ],
+    "isPopular": true,
+    "createdAt": "2026-01-01T04:26:39.466Z",
+    "updatedAt": "2026-01-01T04:40:35.350Z",
+    "discountPrice": 79.99
+  },
+  {
+    "id": "304939f1-3406-4f28-a256-fdd775341dd0",
+    "title": "Formation Diamond",
+    "description": "Tous les avantages Gold\nAccès au groupe VIP privé\n4 sessions de coaching en direct/mois\nAnalyse personnalisée de votre trading\nAccès prioritaire 24/7 au support\nAccès anticipé aux nouvelles fonctionnalités",
+    "price": 150,
+    "isActive": true,
+    "startDate": "2026-01-01T04:26:39.466Z",
+    "endDate": "2027-01-01T04:26:39.466Z",
+    "features": [
+      "Tous les avantages Gold",
+      "Accès au groupe VIP privé",
+      "4 sessions de coaching en direct/mois",
+      "Analyse personnalisée de votre trading",
+      "Accès prioritaire 24/7 au support",
+      "Accès anticipé aux nouvelles fonctionnalités"
+    ],
+    "isPopular": true,
+    "createdAt": "2026-01-01T04:26:39.466Z",
+    "updatedAt": "2026-01-01T04:26:39.466Z"
+  }
+]

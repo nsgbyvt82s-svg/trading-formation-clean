@@ -1,0 +1,43 @@
+﻿{
+    "sessions":  [
+
+                 ],
+    "users":  [
+                  {
+                      "id":  "owner_1",
+                      "username":  "owner1",
+                      "createdAt":  "2026-01-01T00:00:00.000Z",
+                      "password":  "",
+                      "role":  "OWNER",
+                      "name":  "Owner 1",
+                      "updatedAt":  "2026-01-01T00:00:00.000Z",
+                      "status":  "ACTIVE",
+                      "emailVerified":  "2026-01-01T00:00:00.000Z",
+                      "email":  "1compris@diamondtrade.com"
+                  },
+                  {
+                      "id":  "owner_2",
+                      "username":  "vexx_owner",
+                      "createdAt":  "2026-01-01T00:00:00.000Z",
+                      "password":  ".EYsH5D7Jmk2ZKjykVi",
+                      "role":  "OWNER",
+                      "name":  "Vexx Owner",
+                      "updatedAt":  "2026-01-01T00:00:00.000Z",
+                      "status":  "ACTIVE",
+                      "emailVerified":  "2026-01-01T00:00:00.000Z",
+                      "email":  "vexx@diamondtrade.com"
+                  },
+                  {
+                      "id":  "admin_1",
+                      "username":  "admin",
+                      "createdAt":  "2026-01-01T00:00:00.000Z",
+                      "password":  ".hXBaQmfRbqhj3Zl49Ijq94506G",
+                      "role":  "ADMIN",
+                      "name":  "Admin",
+                      "updatedAt":  "2026-01-01T00:00:00.000Z",
+                      "status":  "ACTIVE",
+                      "emailVerified":  "2026-01-01T00:00:00.000Z",
+                      "email":  "admin@example.com"
+                  }
+              ]
+}

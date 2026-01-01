@@ -1,0 +1,82 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Diamond Trade Owner 1",
+      "email": "1compris@diamondtrade.com",
+      "password": "$2a$10$hWbWl21nX1hyZYmx6SlEC.3iOx2YKGV1fw14uuP94h1wimizA9rQG",
+      "role": "OWNER",
+      "username": "diamond_owner_1",
+      "status": "active",
+      "emailVerified": true,
+      "image": null,
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "name": "Diamond Trade Owner 2",
+      "email": "vexx@diamondtrade.com",
+      "password": "$2a$10$XSB.ZZNSsod4qo/ggkmzt.ZJ5vK9MesEcZPpNmFPA2.pdZJ2ZdsVK",
+      "role": "OWNER",
+      "username": "diamond_owner_2",
+      "status": "active",
+      "emailVerified": true,
+      "image": null,
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "0fbc8a71-492d-4948-95af-e34637b52011",
+      "username": "frizxx",
+      "email": "titii1304@gmail.com",
+      "password": "$2a$12$y7tsVA8L9ug2RPoh0o6L2uiS0tt2OZnqiFV75b7Zr6cTvGWIIMnzW",
+      "role": "USER",
+      "status": "active",
+      "emailVerified": null,
+      "name": "frizxx",
+      "image": null,
+      "createdAt": "2025-12-31T20:07:38.330Z",
+      "updatedAt": "2025-12-31T20:07:38.330Z"
+    },
+    {
+      "id": "b0cdc80e-7b8f-44e9-9da4-e3c7dc09c8c2",
+      "username": "frizxx1326dada",
+      "email": "titii1304@yahoo.com",
+      "password": "$2a$12$NZ0UH8uvicBwOswPI4s81.fctONyI0PAWeJdtW46WEAXa2OvBOlGy",
+      "role": "USER",
+      "status": "active",
+      "emailVerified": null,
+      "name": "frizxx1326dada",
+      "image": null,
+      "createdAt": "2025-12-31T21:19:10.956Z",
+      "updatedAt": "2025-12-31T21:19:10.956Z"
+    },
+    {
+      "id": "e91636c7-58b5-4805-a837-7a5a330e8144",
+      "username": "frizxx1326",
+      "email": "titii1304@hotmail.com",
+      "password": "$2a$12$kbbu2s8H/N.tIF8.JvoYcuDHjKWX4FjequMdOlORYOJE8qKzGURNu",
+      "role": "USER",
+      "status": "active",
+      "emailVerified": null,
+      "name": "frizxx1326",
+      "image": null,
+      "createdAt": "2025-12-31T23:23:26.995Z",
+      "updatedAt": "2025-12-31T23:23:26.995Z"
+    },
+    {
+      "id": "2925c65c-eb46-4402-bc2d-7bb323e3f3d6",
+      "username": "own_vexxkawai0_142958563550036",
+      "email": "t.monseur@hotmail.com",
+      "password": "$2a$12$Oskrx8NtLT6yTcGZ1P/zDudm4FtGCW5VlXosFMqQEGKYSb7nvDLz.",
+      "role": "USER",
+      "status": "active",
+      "emailVerified": null,
+      "name": "own_vexxkawai0_142958563550036",
+      "image": null,
+      "createdAt": "2025-12-31T23:45:55.642Z",
+      "updatedAt": "2025-12-31T23:45:55.642Z"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "users": [
+    {
+      "email": "1compris@diamondtrade.com",
+      "password": "$2b$10$/uGtb7UdQMmWMu18CXQG9ewozoHH2f8Hx9C.3wGlm9JuFQbgJP6Dq",
+      "name": "Administrateur 1",
+      "role": "OWNER",
+      "username": "1compris",
+      "emailVerified": "2025-12-31T19:39:16.480Z",
+      "id": "1767209956586",
+      "status": "ACTIVE",
+      "createdAt": "2025-12-31T19:39:16.586Z",
+      "updatedAt": "2025-12-31T19:39:16.586Z"
+    },
+    {
+      "email": "vexx@diamondtrade.com",
+      "password": "$2b$10$wjczFAxHoUaLK.2g8qiJee5ZS2tTJRqJNnc5GA6sIw1hscyaay022",
+      "name": "Administrateur Vexx",
+      "role": "OWNER",
+      "username": "vexx",
+      "emailVerified": "2025-12-31T19:39:16.595Z",
+      "id": "1767209956655",
+      "status": "ACTIVE",
+      "createdAt": "2025-12-31T19:39:16.655Z",
+      "updatedAt": "2025-12-31T19:39:16.655Z"
+    },
+    {
+      "email": "admin@example.com",
+      "password": "$2a$10$9jlqtfYtvcU9gmI3cbeUnuplkbJw39qf06PQjxFQ9QScOMjywP8ge",
+      "name": "Administrateur",
+      "username": "admin",
+      "role": "ADMIN",
+      "id": "user_1bad67c3-5b51-4e9c-9d47-b82a6f38e5d8",
+      "status": "ACTIVE",
+      "emailVerified": null,
+      "createdAt": "2025-12-31T23:30:45.877Z",
+      "updatedAt": "2025-12-31T23:30:45.877Z"
+    },
+    {
+      "email": "client@example.com",
+      "password": "$2a$10$EqQoAUTGZtvdeFTduCrEKeN63qf7InI3f1I1GICGVrlvl/a76kN7K",
+      "name": "Utilisateur Client",
+      "role": "USER",
+      "username": "client",
+      "id": "client_12345",
+      "status": "ACTIVE",
+      "emailVerified": "2025-01-01T00:00:00.000Z",
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "email": "titii1304@hotmail.com",
+      "password": "$2a$10$XDJJiGXI5anuZ8ZCnTKKx.qvO6A5E7loig/S0JuRf2iN8QD0RPZGO",
+      "name": "Titii",
+      "role": "USER",
+      "username": "titii1304",
+      "id": "user_titii1304",
+      "status": "ACTIVE",
+      "emailVerified": "2025-01-01T00:00:00.000Z",
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    }
+  ],
+  "sessions": []
+}

@@ -1,0 +1,14 @@
+model Offer {
+  id          String   @id @default(uuid())
+  title       String
+  description String   @db.Text
+  price       Float
+  discountPrice Float?
+  isActive    Boolean  @default(true)
+  startDate   DateTime
+  endDate     DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("offers")
+}

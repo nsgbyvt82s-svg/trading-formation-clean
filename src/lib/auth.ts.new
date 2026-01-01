@@ -1,0 +1,226 @@
+import { PrismaAdapter } from '@auth/prisma-adapter';
+import { type User as PrismaUser } from '@prisma/client';
+import prisma from './prisma';
+import { compare, hash } from 'bcryptjs';
+import NextAuth, { type NextAuthConfig } from 'next-auth';
+import Credentials from 'next-auth/providers/credentials';
+import DiscordProvider from 'next-auth/providers/discord';
+import type { Adapter } from 'next-auth/adapters';
+
+// Types pour les énumérations
+export type UserRole = 'USER' | 'MODERATOR' | 'ADMIN' | 'OWNER';
+export type AccountType = 'CREDENTIALS' | 'DISCORD' | 'GOOGLE';
+export type UserStatus = 'ACTIVE' | 'SUSPENDED' | 'BANNED';
+
+// Type pour les rôles Discord (stockés sous forme de chaîne JSON)
+type DiscordRoles = string[];
+
+// Type pour l'utilisateur retourné par Prisma
+type PrismaUserWithPassword = Omit<PrismaUser, 'discordRoles' | 'role' | 'accountType' | 'status' | 'discordId'> & {
+  password?: string | null;
+  role: string;
+  accountType: string;
+  status: string;
+  discordRoles: string;
+  discordId: string | null;
+};
+
+// Déclaration des types pour next-auth
+declare module 'next-auth' {
+  interface Session {
+    user: {
+      id: string;
+      username: string | null;
+      role: UserRole;
+      accountType: AccountType;
+      discordId: string | null;
+      emailVerified: Date | null;
+      discordRoles: string[];
+    };
+  }
+
+  interface User {
+    id: string;
+    email: string | null;
+    name: string | null;
+    username: string | null;
+    role: UserRole;
+    accountType: AccountType;
+    discordId: string | null;
+    discordRoles: string[];
+    emailVerified: Date | null;
+    image?: string | null;
+  }
+}
+
+// Configuration de NextAuth
+const authConfig: NextAuthConfig = {
+  adapter: PrismaAdapter(prisma as unknown as Adapter),
+  session: { strategy: 'jwt' },
+  pages: {
+    signIn: '/auth/signin',
+    error: '/auth/error',
+    newUser: '/dashboard'
+  },
+  debug: process.env.NODE_ENV === 'development',
+  callbacks: {
+    async jwt({ token, user, trigger, session }) {
+      if (trigger === 'update' && session) {
+        return { ...token, ...session };
+      }
+      
+      if (user) {
+        return {
+          ...token,
+          id: user.id,
+          role: user.role || 'USER',
+          accountType: user.accountType || 'CREDENTIALS',
+          username: user.username || null,
+          discordId: user.discordId || null,
+          emailVerified: user.emailVerified?.toISOString() || null,
+          discordRoles: user.discordRoles || []
+        };
+      }
+      
+      return token;
+    },
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.id = token.id as string;
+        session.user.role = token.role as UserRole;
+        session.user.accountType = token.accountType as AccountType;
+        session.user.username = token.username as string | null;
+        session.user.discordId = token.discordId as string | null;
+        session.user.emailVerified = token.emailVerified ? new Date(token.emailVerified as string) : null;
+        session.user.discordRoles = token.discordRoles as string[] || [];
+      }
+      return session;
+    },
+    async redirect({ url, baseUrl }) {
+      if (url.startsWith(baseUrl)) return url;
+      if (url.startsWith('/')) return `${baseUrl}${url}`;
+      return baseUrl + '/dashboard';
+    }
+  },
+  providers: [
+    Credentials({
+      name: 'credentials',
+      credentials: {
+        email: { label: 'Email', type: 'email' },
+        username: { label: 'Nom d\'utilisateur', type: 'text' },
+        password: { label: 'Mot de passe', type: 'password' },
+      },
+      async authorize(credentials) {
+        if ((!credentials?.email && !credentials?.username) || !credentials?.password) {
+          throw new Error('Email/nom d\'utilisateur et mot de passe requis');
+        }
+
+        try {
+          const user = await prisma.user.findFirst({
+            where: {
+              OR: [
+                { email: credentials.email as string },
+                { username: credentials.username as string }
+              ]
+            }
+          }) as PrismaUserWithPassword | null;
+
+          if (!user && credentials.email) {
+            if (!credentials.username) {
+              throw new Error('Un nom d\'utilisateur est requis pour créer un compte');
+            }
+
+            const hashedPassword = await hash(credentials.password as string, 12);
+            
+            const newUser = await prisma.user.create({
+              data: {
+                email: credentials.email as string,
+                username: credentials.username as string,
+                password: hashedPassword,
+                role: 'USER',
+                accountType: 'CREDENTIALS',
+                emailVerified: new Date(),
+                status: 'ACTIVE',
+                discordRoles: '[]',
+                lastLogin: new Date(),
+                name: credentials.username as string,
+                emailToken: null,
+                emailTokenExpires: null,
+                image: null,
+                lastIp: null,
+                discordId: null
+              },
+              select: {
+                id: true,
+                email: true,
+                username: true,
+                name: true,
+                role: true,
+                accountType: true,
+                discordId: true,
+                emailVerified: true,
+                discordRoles: true
+              }
+            });
+
+            return {
+              ...newUser,
+              discordRoles: newUser.discordRoles ? JSON.parse(newUser.discordRoles) : []
+            };
+          }
+
+          if (!user || !user.password) {
+            throw new Error('Identifiants invalides');
+          }
+
+          const isValid = await compare(credentials.password as string, user.password);
+          
+          if (!isValid) {
+            throw new Error('Mot de passe incorrect');
+          }
+
+          await prisma.user.update({
+            where: { id: user.id },
+            data: { lastLogin: new Date() }
+          });
+
+          return {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            username: user.username,
+            role: user.role as UserRole,
+            accountType: user.accountType as AccountType,
+            discordId: user.discordId,
+            discordRoles: user.discordRoles ? JSON.parse(user.discordRoles) : [],
+            emailVerified: user.emailVerified
+          };
+        } catch (error) {
+          console.error('Authentication error:', error);
+          throw new Error('Une erreur est survenue lors de l\'authentification');
+        }
+      },
+    }),
+    DiscordProvider({
+      clientId: process.env.DISCORD_CLIENT_ID as string,
+      clientSecret: process.env.DISCORD_CLIENT_SECRET as string,
+      authorization: { params: { scope: 'identify email' } },
+      async profile(profile) {
+        return {
+          id: profile.id,
+          name: profile.global_name || profile.username,
+          email: profile.email,
+          username: profile.username,
+          role: 'USER',
+          accountType: 'DISCORD',
+          discordId: profile.id,
+          discordRoles: [],
+          emailVerified: new Date()
+        };
+      },
+    })
+  ],
+};
+
+// Export des fonctions d'authentification
+export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);
