@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=18.0.0 <19.0.0"
+    "node": ">=18.0.0 <21.0.0"
   },
   "scripts": {
     "dev": "set NEXT_DISABLE_TURBOPACK=1 && next dev --webpack",
-    "build": "next build --no-lint",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "next lint",
     "create-admin": "ts-node --project tsconfig.scripts.json scripts/create-admin.ts"
@@ -28,6 +28,7 @@
     "@stripe/stripe-js": "^8.6.0",
     "@types/recharts": "^1.8.29",
     "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^12.5.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "date-fns": "^4.1.0",
@@ -36,9 +37,10 @@
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.294.0",
     "next": "^16.1.1",
-    "next-auth": "^4.24.7",
+    "next-auth": "^4.24.13",
     "next-themes": "^0.2.1",
     "node-fetch": "^3.3.2",
+    "nodemailer": "^7.0.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.5.0",

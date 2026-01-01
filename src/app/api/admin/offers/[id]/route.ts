@@ -3,10 +3,10 @@ import { getOffer, updateOffer, deleteOffer, readOffers } from '@/lib/offers';
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
   try {
-    const offer = await getOffer(params.id);
+    const offer = await getOffer(context.params.id);
     
     if (!offer) {
       return NextResponse.json(

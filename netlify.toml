@@ -1,11 +1,40 @@
 [build]
   command = "npm run build"
-  publish = ".next"
+  # Ne pas spécifier de répertoire de publication, le plugin s'en chargera
   functions = ".netlify/functions"
 
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "20.19.0"
   NEXT_TELEMETRY_DISABLED = "1"
+  NODE_OPTIONS = "--max_old_space_size=4096"
 
+# Configuration du plugin Next.js
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+  
+# Redirections pour le routage côté client
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+  conditions = {Language = ["en"], Country = ["US"], Role = ["admin"]}
+
+# En-têtes de sécurité
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.stripe.com https://js.stripe.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.stripe.com https://*.stripe.com; frame-src 'self' https://js.stripe.com https://hooks.stripe.com;"
+
+# Paramètres de build optimisés pour Next.js
+[build.processing]
+  skip_processing = true
+  
+# Paramètres de fonction serverless
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = ["@prisma/client"]
